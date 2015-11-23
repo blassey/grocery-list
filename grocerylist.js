@@ -33,7 +33,8 @@ function addItemToList() {
             $(this).hide();
             $(this).parent().find("span").hide();
             $(this).parent().append('<input type="text" class="editField" value="' +     $(this).parent().find("span").html() + '">');
-            $(this).parent().append('<button class="saveButton">Save</button>');
+            var $savebutton = $('<button class="saveButton">Save</button>');
+            $(this).parent().append($savebutton);
             
             
             $(".saveButton").on("click",function() {

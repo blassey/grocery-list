@@ -38,7 +38,8 @@ function addItemToList() {
             
             var $saveButton = $('<button class="saveButton">Save</button>');
             var $cancelButton = $('<button class="cancelButton">Cancel</button>');
-            $(this).parent().append($saveButton, $cancelButton);
+            var $deleteButton = $('<button class="deleteButton">Delete</button>');
+            $(this).parent().append($saveButton, $cancelButton, $deleteButton);
             
             $cancelButton.on('click', function() {
                 $originaltext.show();
@@ -46,6 +47,10 @@ function addItemToList() {
                 $(this).remove();
                 $saveButton.remove();
                 $editButton.show();
+            });
+            
+            $deleteButton.on('click', function(){
+                $newItem.remove();
             });
             
             $saveButton.on("click",function() {

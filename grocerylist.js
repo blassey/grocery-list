@@ -26,18 +26,29 @@ function addItemToList() {
         $newItem.append("<span>" +  item + "</span>");
         var $editButton = $("<button class='editButton'>Edit</button>");
         $newItem.append($editButton);
-
+        
         
         $("#grocerylist").append($newItem);
         $editButton.on("click",function() {
+            var $originaltext=$(this).parent().find("span");
             $(this).hide();
-            $(this).parent().find("span").hide();
-            $(this).parent().append('<input type="text" class="editField" value="' +     $(this).parent().find("span").html() + '">');
-            var $savebutton = $('<button class="saveButton">Save</button>');
-            $(this).parent().append($savebutton);
+            $originaltext.hide();
+            var $inputtext=$('<input type="text" class="editField" value="' +     $(this).parent().find("span").html() + '">');
+            $(this).parent().append($inputtext);
             
+            var $saveButton = $('<button class="saveButton">Save</button>');
+            var $cancelButton = $('<button class="cancelButton">Cancel</button>');
+            $(this).parent().append($saveButton, $cancelButton);
             
-            $savebutton.on("click",function() {
+            $cancelButton.on('click', function() {
+                $originaltext.show();
+                $inputtext.remove();
+                $(this).remove();
+                $saveButton.remove();
+                $editButton.show();
+            });
+            
+            $saveButton.on("click",function() {
                  var newText = $(this).parent().find(".editField").val();
                 if (checkForUnique(newText)) {
                     $(this).parent().find("span").html(newText);
@@ -45,6 +56,7 @@ function addItemToList() {
                     $(this).parent().find("span").show();
                     $(this).parent().find(".editButton").show();
                     $(this).remove();
+                    $cancelButton.remove();
                 } else {
                     alert("This item is a duplicate.");   
                 }
@@ -85,11 +97,6 @@ function checkForUnique(listItem) {
 
 /*
 TODO:
-    - DONE enter key doesn't work
     - can't delete items or reorder them or edit them
     - DONE last item stays in the box after being added to the list
-    - DONE box doesn't get focus after adding item
-    - can add blank items
-    - DONE can add duplicates
-    - would be easier in jQuery
 */

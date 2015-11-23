@@ -37,7 +37,7 @@ function addItemToList() {
             $(this).parent().append($savebutton);
             
             
-            $(".saveButton").on("click",function() {
+            $savebutton.on("click",function() {
                  var newText = $(this).parent().find(".editField").val();
                 if (checkForUnique(newText)) {
                     $(this).parent().find("span").html(newText);

@@ -29,7 +29,7 @@ function addItemToList() {
 
         
         $("#grocerylist").append($newItem);
-        $(".editButton").on("click",function() {
+        $editButton.on("click",function() {
             $(this).hide();
             $(this).parent().find("span").hide();
             $(this).parent().append('<input type="text" class="editField" value="' +     $(this).parent().find("span").html() + '">');
